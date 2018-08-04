@@ -104,3 +104,9 @@ class Media:
             'lat': location['lat'],
             'lon': location['lng']
         }
+
+    def caption(self):
+        try:
+            return self.info()['edge_media_to_caption']['edges'][0]['node']['text']
+        except IndexError: # no caption
+            return ''
