@@ -90,7 +90,7 @@ class Media:
     def location(self):
         try:
             location = self.info()['location']['id']
-        except KeyError:
+        except TypeError:
             return None
 
         logging.info('Getting location of %s', self.shortcode)
