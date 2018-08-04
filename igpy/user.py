@@ -16,7 +16,7 @@ class User:
             self.cache['user_id'] = user_id
             return user_id
 
-    def user_info(self):
+    def info(self):
         logging.info('Getting user info of %s', self.username)
         return self.baseapi.user_info(self.user_id())
 
