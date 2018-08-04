@@ -81,7 +81,7 @@ class Media:
 
             cleaned_comment['text'] = comment['text']
             cleaned_comment['time'] = comment['created_at']
-            cleaned_comment['user'] = comment['owner']['username']
+            cleaned_comment['username'] = comment['owner']['username']
 
             cleaned_comments.append(cleaned_comment)
 
