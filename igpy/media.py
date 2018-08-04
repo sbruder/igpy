@@ -110,3 +110,6 @@ class Media:
             return self.info()['edge_media_to_caption']['edges'][0]['node']['text']
         except IndexError: # no caption
             return ''
+
+    def date(self):
+        return self.info()['taken_at_timestamp']
