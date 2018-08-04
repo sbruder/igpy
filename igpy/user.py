@@ -17,8 +17,13 @@ class User:
             return user_id
 
     def info(self):
-        logging.info('Getting user info of %s', self.username)
-        return self.baseapi.user_info(self.user_id())
+        try:
+            return self.cache['info']
+        except KeyError:
+            logging.info('Getting user info of %s', self.username)
+            info = self.baseapi.user_info(self.user_id())
+            self.cache['info'] = info
+            return info
 
     def following(self):
         logging.info('Getting users followed by %s', self.username)
