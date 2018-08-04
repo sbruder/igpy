@@ -25,6 +25,9 @@ class User:
             self.cache['info'] = info
             return info
 
+    def profile_picture(self):
+        return self.info()['hd_profile_pic_url_info']['url']
+
     def following(self):
         logging.info('Getting users followed by %s', self.username)
         following = self.baseapi.graphql_depaginate(
