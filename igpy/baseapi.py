@@ -35,6 +35,8 @@ class BaseApi:
                                   'action. Your Session ID may not be valid.')
         if r.status_code == 404:
             raise FileNotFoundError('The Object you requested does not exist.')
+        if r.status_code == 429:
+            raise Exception('You hit the rate limit. Please try again later.')
         else:
             raise Exception(f'An unknown error occured (got HTTP status {r.status_code})')
 
