@@ -86,6 +86,9 @@ class BaseApi:
                 bar.max_value = data['count']
                 bar.update(len(edges))
 
+        if 'bar' in locals():
+            bar.finish()
+
         return edges
 
     def short_info(self, identifier, category):
