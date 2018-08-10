@@ -80,7 +80,7 @@ class Media:
             cleaned_comment = dict()
 
             cleaned_comment['text'] = comment['text']
-            cleaned_comment['time'] = comment['created_at']
+            cleaned_comment['date'] = comment['created_at']
             cleaned_comment['username'] = comment['owner']['username']
 
             cleaned_comments.append(cleaned_comment)
