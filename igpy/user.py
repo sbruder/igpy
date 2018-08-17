@@ -57,3 +57,23 @@ class User:
             }
         )
         return [item['shortcode'] for item in media]
+
+    def story(self):
+        logging.info('Getting stories of %s', self.username)
+        reels = self.baseapi.graphql_request(
+            query_hash='45246d3fe16ccc6577e0bd297a5db1ab',
+            variables={
+                'reel_ids': [self.user_id()],
+                'precomposed_overlay': False
+            }
+        )['reels_media']
+
+        items = []
+        for item in reels[0]['items']:
+            items.append({
+                'date': item['taken_at_timestamp'],
+                'display_url': item['video_resources'][-1]['src'] if item['is_video'] else item['display_url'],
+                'expires': item['expiring_at_timestamp'],
+                'external_url': item['story_cta_url']
+            })
+        return items
