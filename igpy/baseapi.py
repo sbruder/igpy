@@ -3,6 +3,7 @@ import logging
 import progressbar
 import requests
 
+
 class BaseApi:
     """BaseApi is the low-level component.
 

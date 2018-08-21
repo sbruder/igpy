@@ -1,6 +1,7 @@
 import logging
 from .baseapi import BaseApi
 
+
 class User:
     def __init__(self, username, session_id):
         self.baseapi = BaseApi(session_id=session_id)

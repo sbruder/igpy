@@ -1,6 +1,7 @@
 import logging
 from .baseapi import BaseApi
 
+
 class Media:
     def __init__(self, shortcode, session_id):
         self.baseapi = BaseApi(session_id=session_id)
@@ -108,7 +109,7 @@ class Media:
     def caption(self):
         try:
             return self.info()['edge_media_to_caption']['edges'][0]['node']['text']
-        except IndexError: # no caption
+        except IndexError:  # no caption
             return ''
 
     def date(self):

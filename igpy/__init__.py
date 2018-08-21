@@ -7,6 +7,7 @@ import logging
 from .user import User
 from .media import Media
 
+
 class Api:
     """Preferred API class for end users (unifies authentication and logging)."""
     def __init__(self, session_id, loglevel=logging.WARNING):
