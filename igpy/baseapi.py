@@ -24,7 +24,7 @@ class BaseApi:
             'sessionid': session_id
         }
 
-    def __authenticated_request(self, url, payload={}):
+    def authenticated_request(self, url, payload={}):
         """Performs an HTTP request with authentication and payload."""
         logging.debug('Performing authenticated request to %s with payload %s '
                       'and cookies %s', url, payload, self.cookies)
@@ -40,7 +40,7 @@ class BaseApi:
         if r.status_code == 429:
             logging.info('Hit Rate limit. Waiting for 15 seconds.')
             time.sleep(15)
-            return self.__authenticated_request(url, payload)
+            return self.authenticated_request(url, payload)
         else:
             raise Exception(f'An unknown error occured (got HTTP status {r.status_code})')
 
@@ -50,7 +50,7 @@ class BaseApi:
             'query_hash': query_hash,
             'variables': json.dumps(variables)
         }
-        r = self.__authenticated_request(
+        r = self.authenticated_request(
             url='https://www.instagram.com/graphql/query/',
             payload=payload
         )
@@ -117,7 +117,7 @@ class BaseApi:
         else:
             raise KeyError(f'Invalid category ‘{category}’')
 
-        r = self.__authenticated_request(f'https://www.instagram.com/{path}/?__a=1')
+        r = self.authenticated_request(f'https://www.instagram.com/{path}/?__a=1')
         try:
             data = r['graphql'][graphql_id]
         except KeyError:
@@ -130,7 +130,7 @@ class BaseApi:
         This is not possible with the GraphQL endpoint or the short info, which
         are missing e.g. the full-resolution profile picture.
         """
-        r = self.__authenticated_request(f'https://i.instagram.com/api/v1/users/{userid}/info/')
+        r = self.authenticated_request(f'https://i.instagram.com/api/v1/users/{userid}/info/')
         try:
             data = r['user']
         except KeyError:

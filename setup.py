@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='igpy',
-    version='0.0.6',
+    version='0.0.7',
     author='Simon Bruder',
     author_email='dev+igpy@sbruder.de',
     description='igpy is a simple object-oriented API for instagram using the end-user GraphQL API.',
