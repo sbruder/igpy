@@ -2,6 +2,7 @@ import json
 import logging
 import progressbar
 import requests
+import time
 
 
 class BaseApi:
@@ -37,7 +38,9 @@ class BaseApi:
         if r.status_code == 404:
             raise FileNotFoundError('The Object you requested does not exist.')
         if r.status_code == 429:
-            raise Exception('You hit the rate limit. Please try again later.')
+            logging.info('Hit Rate limit. Waiting for 15 seconds.')
+            time.sleep(15)
+            return self.__authenticated_request(url, payload)
         else:
             raise Exception(f'An unknown error occured (got HTTP status {r.status_code})')
 
