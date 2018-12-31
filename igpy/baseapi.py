@@ -123,16 +123,3 @@ class BaseApi:
         except KeyError:
             raise KeyError(f'Response is invalid: missing ‘graphql’ and ‘{graphql_id}’')
         return data
-
-    def user_info(self, userid):
-        """Get basic user info.
-
-        This is not possible with the GraphQL endpoint or the short info, which
-        are missing e.g. the full-resolution profile picture.
-        """
-        r = self.authenticated_request(f'https://i.instagram.com/api/v1/users/{userid}/info/')
-        try:
-            data = r['user']
-        except KeyError:
-            raise KeyError('Response is invalid: missing ‘user’')
-        return data

@@ -13,7 +13,7 @@ class User:
             return self.cache['user_id']
         except KeyError:
             logging.info('Getting user ID of %s', self.username)
-            user_id = self.baseapi.short_info(self.username, 'user')['id']
+            user_id = self.info()['id']
             self.cache['user_id'] = user_id
             return user_id
 
@@ -22,12 +22,13 @@ class User:
             return self.cache['info']
         except KeyError:
             logging.info('Getting user info of %s', self.username)
-            info = self.baseapi.user_info(self.user_id())
+            info = self.baseapi.short_info(self.username, 'user')
             self.cache['info'] = info
             return info
 
     def profile_picture(self):
-        return self.info()['hd_profile_pic_url_info']['url']
+        # instagram does not expose 1080x1080 anymore, only 320x320
+        return self.info()['profile_pic_url_hd']
 
     def following(self):
         logging.info('Getting users followed by %s', self.username)
